@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>北京旅游线路选择</title>
+    <meta
+      name="description"
+      content="选择北京四天三晚或五天四晚旅游线路，查看行程、亮点和预算摘要。"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="#routes" aria-label="返回线路选择">
+        <span class="brand-mark">京</span>
+        <span>
+          <strong>京行精选</strong>
+          <small>Beijing Routes</small>
+        </span>
+      </a>
+      <nav class="top-nav" aria-label="主导航">
+        <a href="#routes">线路</a>
+        <a href="#itinerary">行程</a>
+        <a href="#booking">确认</a>
+      </nav>
+      <a class="header-action" href="#booking">
+        <i data-lucide="calendar-check" aria-hidden="true"></i>
+        <span>锁定线路</span>
+      </a>
+    </header>
+
+    <main>
+      <section class="hero" aria-labelledby="page-title">
+        <img
+          class="hero-image"
+          src="https://commons.wikimedia.org/wiki/Special:FilePath/The%20Forbidden%20City%20in%20the%20summer.JPG?width=1800"
+          alt="北京故宫夏日景观"
+        />
+        <div class="hero-shade" aria-hidden="true"></div>
+        <div class="hero-content">
+          <div class="hero-copy">
+            <p class="eyebrow">北京深度游线路选择</p>
+            <h1 id="page-title">北京线路选择</h1>
+            <p>
+              直接选择四天三晚或五天四晚，系统会同步更新推荐路线、每日安排和出行摘要。
+            </p>
+          </div>
+
+          <section class="selector-panel" aria-label="线路快速选择">
+            <div class="panel-heading">
+              <span>选择出游时长</span>
+              <strong id="selectedDurationLabel">四天三晚</strong>
+            </div>
+            <div class="duration-tabs" role="tablist" aria-label="出游时长">
+              <button
+                class="duration-tab is-active"
+                type="button"
+                role="tab"
+                aria-selected="true"
+                data-duration="4d3n"
+              >
+                <i data-lucide="sun-medium" aria-hidden="true"></i>
+                <span>四天三晚</span>
+              </button>
+              <button
+                class="duration-tab"
+                type="button"
+                role="tab"
+                aria-selected="false"
+                data-duration="5d4n"
+              >
+                <i data-lucide="moon-star" aria-hidden="true"></i>
+                <span>五天四晚</span>
+              </button>
+            </div>
+            <div class="quick-summary" aria-live="polite">
+              <span>
+                <i data-lucide="map-pin" aria-hidden="true"></i>
+                <b id="summarySpots">8</b> 个核心景点
+              </span>
+              <span>
+                <i data-lucide="hotel" aria-hidden="true"></i>
+                <b id="summaryNights">3</b> 晚住宿
+              </span>
+              <span>
+                <i data-lucide="wallet-cards" aria-hidden="true"></i>
+                <b id="summaryBudget">舒适型</b>
+              </span>
+            </div>
+          </section>
+        </div>
+      </section>
+
+      <section class="route-section" id="routes" aria-labelledby="routes-title">
+        <div class="section-heading">
+          <p class="eyebrow">Route Options</p>
+          <h2 id="routes-title">选择你的北京线路</h2>
+          <p>每条线路都可立即选择，适合不同节奏、预算和同行人群。</p>
+        </div>
+        <div class="route-grid" id="routeGrid" aria-live="polite"></div>
+      </section>
+
+      <section class="details-shell" aria-label="线路详情">
+        <aside class="choice-card" aria-labelledby="choice-title">
+          <p class="eyebrow">Current Choice</p>
+          <h2 id="choice-title">已选择线路</h2>
+          <div class="choice-visual">
+            <img id="choiceImage" alt="" />
+            <span id="choiceBadge">热门</span>
+          </div>
+          <h3 id="choiceName">皇城经典线</h3>
+          <p id="choiceIntro"></p>
+          <dl class="choice-stats">
+            <div>
+              <dt>时长</dt>
+              <dd id="choiceDuration">4 天 3 晚</dd>
+            </div>
+            <div>
+              <dt>节奏</dt>
+              <dd id="choicePace">适中</dd>
+            </div>
+            <div>
+              <dt>预算</dt>
+              <dd id="choicePrice">¥2,880 起</dd>
+            </div>
+          </dl>
+          <a class="primary-link" href="#booking">
+            <i data-lucide="send" aria-hidden="true"></i>
+            <span>确认这条线路</span>
+          </a>
+        </aside>
+
+        <section class="itinerary" id="itinerary" aria-labelledby="itinerary-title">
+          <div class="section-heading compact">
+            <p class="eyebrow">Daily Plan</p>
+            <h2 id="itinerary-title">每日行程</h2>
+          </div>
+          <div class="timeline" id="timeline"></div>
+        </section>
+      </section>
+
+      <section class="booking-section" id="booking" aria-labelledby="booking-title">
+        <div class="booking-copy">
+          <p class="eyebrow">Confirm</p>
+          <h2 id="booking-title">提交线路选择</h2>
+          <p>
+            选择出发日期、人数和住宿偏好，页面会生成一份清晰的线路确认摘要。
+          </p>
+        </div>
+        <form class="booking-form" id="bookingForm">
+          <label>
+            <span>出发日期</span>
+            <input type="date" id="travelDate" required />
+          </label>
+          <label>
+            <span>出行人数</span>
+            <input type="number" id="travelers" min="1" max="12" value="2" required />
+          </label>
+          <label>
+            <span>住宿偏好</span>
+            <select id="hotelTier">
+              <option value="舒适酒店">舒适酒店</option>
+              <option value="精品酒店">精品酒店</option>
+              <option value="高端酒店">高端酒店</option>
+            </select>
+          </label>
+          <label>
+            <span>联系人</span>
+            <input type="text" id="contactName" placeholder="请输入姓名" required />
+          </label>
+          <button class="submit-button" type="submit">
+            <i data-lucide="check-circle-2" aria-hidden="true"></i>
+            <span>生成选择单</span>
+          </button>
+        </form>
+        <div class="confirmation" id="confirmation" role="status" aria-live="polite">
+          选择线路后，这里会显示确认信息。
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <span>京行精选</span>
+      <span>图片来自 Wikimedia Commons，行程为网站演示方案。</span>
+    </footer>
+  </body>
+</html>
